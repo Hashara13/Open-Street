@@ -9,8 +9,10 @@ export default function SearchCard() {
   const [page, setPage] = useState(1);
   const { books, loading, error, totalItems } = BooksAPI(query, page);
 
-  const handleNextPage = () => setPage((prevPage) => prevPage + 1);
-  const handlePreviousPage = () => setPage((prevPage) => Math.max(prevPage - 1, 1));
+  const handleSearch = (searchQuery) => {
+    setQuery(searchQuery);
+    setPage(1);
+  };
 
   return (
     <div>
@@ -22,30 +24,35 @@ export default function SearchCard() {
       >
         Search Books
       </motion.h1>
-      <SearchBar setQuery={setQuery} />
-      {loading && <p className="text-center text-indigo-600">Loading...</p>}
-      {error && <p className="text-center text-red-600">Error: {error}</p>}
-      {books.length > 0 && <List books={books} />}
-      {totalItems > 0 && (
-        <div className="flex justify-center mt-4">
-          <button
-            className="px-4 py-2 bg-indigo-500 text-white rounded-l hover:bg-indigo-600"
-            onClick={handlePreviousPage}
-            disabled={page === 1}
-          >
-            Previous
-          </button>
-          <span className="px-4 py-2 bg-gray-200 text-gray-700">
-            Page {page}
-          </span>
-          <button
-            className="px-4 py-2 bg-indigo-500 text-white rounded-r hover:bg-indigo-600"
-            onClick={handleNextPage}
-            disabled={books.length < 9}
-          >
-            Next
-          </button>
+      <SearchBar onSearch={handleSearch} />
+      {loading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center text-xl text-indigo-600 mt-8"
+        >
+          Loading...
+        </motion.div>
+      )}
+      {error && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center text-xl text-red-600 mt-8"
+        >
+          Error: {error}
+        </motion.div>
+      )}
+      {books.length > 0 && (
+        <div>
+          <p className="text-center text-gray-600 mb-4">
+            Showing {books.length} of {totalItems} results
+          </p>
+          <List books={books} />
         </div>
+      )}
+      {query && books.length === 0 && !loading && !error && (
+        <p className="text-center text-xl text-gray-600 mt-8">No books found for "{query}"</p>
       )}
     </div>
   );

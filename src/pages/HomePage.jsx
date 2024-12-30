@@ -11,7 +11,7 @@ export default function HomePage() {
         transition={{ duration: 0.5 }}
         className="text-4xl font-bold text-indigo-800 mb-8"
       >
-        Welcome to BookExplorer
+        Welcome to Open Street
       </motion.h1>
       <motion.p
         initial={{ opacity: 0 }}

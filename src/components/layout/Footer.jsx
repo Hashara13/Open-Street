@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between">
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h3 className="text-xl font-bold mb-2">BookExplorer</h3>
+            <h3 className="text-xl font-bold mb-2">Open Street</h3>
             <p className="text-sm">Discover your next favorite book with our powerful search engine.</p>
           </div>
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
@@ -39,7 +39,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 text-center text-sm">
-          <p>&copy; 2023 BookExplorer. All rights reserved.</p>
+          <p>&copy; 2024 Open Street. All rights reserved.</p>
         </div>
       </div>
     </footer>
